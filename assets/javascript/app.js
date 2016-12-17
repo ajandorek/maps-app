@@ -17,6 +17,8 @@ $(document).ready(function(){
     $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
       lat = response.results[0].geometry.location.lat;
       lng = response.results[0].geometry.location.lng;
+      city = response.results[0].formatted_address;
+      console.log(city);
       console.log(lat);
       console.log(lng);
 
@@ -28,15 +30,6 @@ $(document).ready(function(){
 
 
 function createMap(){
- var map = new GMaps({
-  div: '#mapContainer',
-  lat: lat,
-  lng: lng,
-  zoom: 10
-  });
-}
-
-function initMap() {
  var map = new GMaps({
   div: '#mapContainer',
   lat: lat,
@@ -72,3 +65,5 @@ function initMap() {
 
   });
 }
+
+});
