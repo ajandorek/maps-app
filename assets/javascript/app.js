@@ -42,7 +42,8 @@ function initMap() {
   lat: lat,
   lng: lng,
   zoom: 10
-  });}
+  });
+}
 
 function initMap() {
  var map = new GMaps({
@@ -54,10 +55,6 @@ function initMap() {
 
   GMaps.geolocate({
   success: function(position) {
-
-  GMaps.geolocate({
-  success: function(position) {
-
     map.setCenter(position.coords.latitude, position.coords.longitude);
     map.addMarker ({
       lat: position.coords.latitude,
@@ -65,7 +62,7 @@ function initMap() {
     });
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
     $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
-      city = response.results[0].address_components[3].long_name;
+      city = response.results[0].address_components[3].long_name + ", " + response.results[0].address_components[5].short_name;
       console.log(city);
     })
   },
@@ -76,4 +73,5 @@ function initMap() {
   });
 }
 
-})
+});
+
