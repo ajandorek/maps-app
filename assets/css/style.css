@@ -17,3 +17,7 @@
 	margin: 5px;
 	background-color: #eaeaea;
 }
+
+.list-group-item-text {
+	margin-left: 15px;
+}
