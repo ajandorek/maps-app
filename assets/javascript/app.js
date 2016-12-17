@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+// http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=cd525757f3eeb5be1eefb85a523a2c53
   var lat = "";
   var lng = "";
   var city = "";
@@ -28,7 +28,7 @@ $(document).ready(function(){
     })
 
     return false
-   });
+   });// end of submitSearch on click
 
 
 function createMap() {
@@ -49,4 +49,4 @@ function createMap() {
   });
 };
 
-})
+}) // End of document ready
