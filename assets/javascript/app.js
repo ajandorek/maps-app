@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-  var lat = "";
-  var lng = "";
+  var lat = "30.268034";
+  var lng = "-97.742777";
   var city = "";
 
   initMap();
