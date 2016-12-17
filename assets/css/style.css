@@ -4,4 +4,16 @@
 
 #mapContainer{
 	height: 400px;
+	margin: 5px;
+	padding: 5px;
+	background-color: #eaeaea;
+	outline: solid black 1px;
+}
+
+#mapForm {
+	min-height: 400px;
+	outline: solid black 1px;
+	padding: 5px;
+	margin: 5px;
+	background-color: #eaeaea;
 }
