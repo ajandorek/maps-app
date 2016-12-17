@@ -46,11 +46,17 @@ function initMap() {
 
   GMaps.geolocate({
   success: function(position) {
+    console.log(position.city)
     map.setCenter(position.coords.latitude, position.coords.longitude);
     map.addMarker ({
       lat: position.coords.latitude,
       lng: position.coords.longitude
     });
+    var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
+    $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
+      city = response.results[0].address_components[3].long_name;
+      console.log(city);
+    })
   },
   error: function(error) {
     alert('Geolocation failed: '+error.message);
