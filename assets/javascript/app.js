@@ -42,11 +42,22 @@ function initMap() {
   lat: lat,
   lng: lng,
   zoom: 10
+  });}
+
+function initMap() {
+ var map = new GMaps({
+  div: '#mapContainer',
+  lat: lat,
+  lng: lng,
+  zoom: 10
   });
 
   GMaps.geolocate({
   success: function(position) {
-    console.log(position.city)
+
+  GMaps.geolocate({
+  success: function(position) {
+
     map.setCenter(position.coords.latitude, position.coords.longitude);
     map.addMarker ({
       lat: position.coords.latitude,
