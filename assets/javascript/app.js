@@ -1,41 +1,43 @@
-// $(document).ready(function(){
+$(document).ready(function(){
 
-//   var lat = "";
-//   var lng = "";
-//   var city = "";
+  var lat = "";
+  var lng = "";
+  var city = "";
 
-//   createMap();
+  createMap();
 
-//   $("#submitSearch").on("click", function(event){
+  $("#submitSearch").on("click", function(event){
 
-//     event.preventDefault();
+    event.preventDefault();
 
-//   if (city === ""){
-//     city = "Austin, TX";
-//   } else {
-//     city = $("#searchText").val().trim();
-//   }
+  if (city === ""){
+    city = "Austin, TX";
+  } else {
+    city = $("#searchText").val().trim();
+  }
 
-//     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyCRZI4dIrbRx_-KVnKL_qx-8DKUGDOm0y0";
+    var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyCRZI4dIrbRx_-KVnKL_qx-8DKUGDOm0y0";
 
-//     $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
-//       lat = response.results[0].geometry.location.lat;
-//       lng = response.results[0].geometry.location.lng;
-//       console.log(lat);
-//       console.log(lng);
+    $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
+      lat = response.results[0].geometry.location.lat;
+      lng = response.results[0].geometry.location.lng;
+      console.log(lat);
+      console.log(lng);
 
-//       createMap();
-//     })
-//    });
+      createMap();
+    })
+
+    return false
+   });
 
 
-// function createMap() {
-//   new GMaps({
-//   div: '#mapContainer',
-//   lat: lat,
-//   lng: lng,
-//   zoom: 10
-//   });
-// };
+function createMap() {
+  new GMaps({
+  div: '#mapContainer',
+  lat: lat,
+  lng: lng,
+  zoom: 10
+  });
+};
 
-// })
+})
