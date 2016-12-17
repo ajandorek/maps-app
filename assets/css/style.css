@@ -1,3 +1,7 @@
 .headline {
 	padding: 10px;
 }
+
+#mapContainer{
+	height: 400px;
+}
