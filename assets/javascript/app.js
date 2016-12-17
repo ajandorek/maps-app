@@ -32,11 +32,20 @@ $(document).ready(function(){
 
 
 function createMap() {
-  new GMaps({
+ var map = new GMaps({
   div: '#mapContainer',
   lat: lat,
   lng: lng,
   zoom: 10
+  });
+
+  GMaps.geolocate({
+  success: function(position) {
+    map.setCenter(position.coords.latitude, position.coords.longitude);
+  },
+  error: function(error) {
+    alert('Geolocation failed: '+error.message);
+  }
   });
 };
 
