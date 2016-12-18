@@ -12,12 +12,11 @@ body {
     display: block;
     width: 100%;
     text-align: center;
-    /*background: url('../img/circlebackground.jpg') no-repeat center center scroll;
+    background: url('http://placehold.it/1900x500') no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
-    -o-background-size: cover;*/
-    background-color: #2d7977;
+    -o-background-size: cover;
 }
 
 .headline {

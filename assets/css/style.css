@@ -18,6 +18,11 @@
 	background-color: #eaeaea;
 }
 
+#news-panel-title {
+	text-transform:capitalize;
+}
+
 .list-group-item-text {
 	margin-left: 15px;
+	
 }

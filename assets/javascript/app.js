@@ -63,6 +63,13 @@ function initMap() {
     $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
       city = response.results[0].address_components[3].long_name;
       console.log(city);
+
+      //getNews for Geolocated City
+      getNews(city);
+      //
+      //add call to get weather here
+      //
+
     })
   },
   error: function(error) {
@@ -77,7 +84,8 @@ function initMap() {
 //getNews function
 
 function getNews(city){
-  // city is a global variable string for the query
+
+  clearNewsVariables();
  
   // return 5 articles
   var numResults  = 5;
@@ -127,7 +135,11 @@ function getNews(city){
       }).fail(function(err) {
         throw err;
     });
-    
+  
+  // Add City name to the News pannel Title
+  $("#news-panel-title").html("Local News for " + city);
+
+
 function displayArticles(){
 
   for (j=0; j < 5; j++) {
@@ -160,6 +172,8 @@ function displayArticles(){
       var articleLink = "#";
     };
 
+
+
   //make article container that surrounds each article
     var articleBox = $("<a>");
     articleBox.attr("href", articleLink);
@@ -170,19 +184,28 @@ function displayArticles(){
     var articleHeading =$("<h4>");
     articleHeading.attr("class", "panel-heading articleTitle");
     articleHeading.css("font-weight","Bold");
+  
+  //create article date in panel
+    var articleDateArea = $("<p>");
+    articleDateArea.attr("class", "list-group-item-text");
 
   //create article body in panel
-    var articleBody = $("<p>");
+    var articleBody = $("<p><b>");
     articleBody.attr("class", "list-group-item-text");
+
 
   //add article heading to link and put it in the panel-header
     // headingLink.html(headline);
      articleHeading.html(headline);
 
+     articleDateArea.append(articleDate+"</b></p>");
   
 
   //add panel-header to article box
     articleBox.append(articleHeading);
+
+  //add date to article box
+    articleBox.append(articleDateArea);
 
   //add article to articleBody
     articleBody.append(articleAbstract);
@@ -202,7 +225,7 @@ function displayArticles(){
 
 }; //end display articles
 
-//return false;
+
 } //function getNews
 
 function clearNewsVariables(){
