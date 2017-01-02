@@ -66,7 +66,7 @@
 
                 <button type="submit" class="btn btn-default" id="submitSearch">Submit</button>
             </form>
-
+             <button type="button" class="btn btn-default" id="submit_get_weather">Submit</button>
 <!--                 <ul class="nav navbar-nav">
                     <li>
                         <a href="#about">About</a>
@@ -94,7 +94,6 @@
                         <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
                     </div>
                     <div class="col-sm-5" id="mapForm">
-                          <button type="button" class="btn btn-default" id="submit_get_weather">Get Weather</button>
                     <!--Place your maps code here-->
                         <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
                     </div>
@@ -112,16 +111,16 @@
         <div class="featurette col-md-6" id="newsBox">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Local News</h3>
+                    <h3 class="panel-title" id="news-panel-title">Local News</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" >
                     <div class="list-group" id="newsContainer">
-                        <a href="#" class="list-group-item" >
-                            <h4 class="list-group-item-heading">News Headline</h4>
-                            <p class="list-group-item-text">News summary or blurb or whatever is available from the API. There is a way to check for it and display whatever comes back as valid. You can use this code for your JS file in the loop to write to #newsBox</p>
+                        <a href="#" class="list-group-item">
+                            <h4 class="list-group-item-heading"></h4>
+                            <p class="list-group-item-text"></p>
                          </a>
         
-                
+                                        
                     </div>
                 </div>
             </div>
@@ -150,7 +149,7 @@
                     <h3 class="panel-title">Local Something or Other</h3>
                 </div>
                 <div class="panel-body" id="newItemContainer">
-                    <p>This is where the whatever items go</p>
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -170,7 +169,10 @@
     </div>
     <!-- /.container -->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- node.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
@@ -178,6 +180,11 @@
 
 <!-- jQuery -->
     <script src="assets/javascript/jquery.js"></script>
+
+
+<!-- moment js -->
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
 <!-- Custom JavaScript -->
     <script src="assets/javascript/app.js"></script>
 
