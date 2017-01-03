@@ -1,0 +1,94 @@
+
+.headline {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+0,2ab0ed+26,9fd8ef+49,bfe8f9+61,e4f5fc+80,ffffff+93 */
+background: rgb(0,0,0); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 0%, rgba(42,176,237,1) 26%, rgba(159,216,239,1) 49%, rgba(191,232,249,1) 61%, rgba(228,245,252,1) 80%, rgba(255,255,255,1) 93%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(0,0,0,1) 0%,rgba(42,176,237,1) 26%,rgba(159,216,239,1) 49%,rgba(191,232,249,1) 61%,rgba(228,245,252,1) 80%,rgba(255,255,255,1) 93%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(0,0,0,1) 0%,rgba(42,176,237,1) 26%,rgba(159,216,239,1) 49%,rgba(191,232,249,1) 61%,rgba(228,245,252,1) 80%,rgba(255,255,255,1) 93%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+	padding: 10px;
+}
+
+#mapContainer{
+	height: 400px;
+		margin: auto;
+	margin-top: 5px;
+	padding: 5px;
+	background-color: #eaeaea;
+	outline: solid black 1px;
+}
+
+#mapForm {
+	min-height: 400px;
+	outline: solid black 1px;
+	margin: auto;
+	margin-top: 5px;
+
+	padding: 5px;
+	background-color: #eaeaea;
+}
+
+#news-panel-title {
+	text-transform:capitalize;
+}
+
+.list-group-item-text {
+	margin-left: 15px;
+	
+}
+
+div.row {
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+
+
+
+
+@media only screen and (min-width: 800px){
+
+#mapContainer{
+	margin: 0;
+}
+
+#mapForm {
+margin-top: 0;
+margin-bottom: 0;
+margin-right: 0;
+    margin-left: 8.33333333%
+}
+
+
+
+	.collapse {
+  display: table;
+}
+	.panel-body:before,
+	.panel-body:after {
+	  display: table;
+	 
+	}
+
+	#accordion > .panel >.panel-heading > .panel-title > a{
+		 pointer-events: none;
+   cursor: default;
+	}
+
+
+	.panel {
+		  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;	
+    float: left;
+     width: 50%;
+ 
+	}
+
+.panel-group .panel+.panel {
+	    margin-top: 0;
+}
+}
