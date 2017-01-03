@@ -66,8 +66,8 @@
 
                 <button type="submit" class="btn btn-default" id="submitSearch">Submit</button>
             </form>
-             <button type="button" class="btn btn-default" id="submit_get_weather">Submit</button>
-<!--                 <ul class="nav navbar-nav">
+            <!-- <button type="button" class="btn btn-default" id="submit_get_weather">Submit</button>
+             <ul class="nav navbar-nav">
                     <li>
                         <a href="#about">About</a>
                     </li>
@@ -93,7 +93,7 @@
                     <!--Place your maps code here-->
                         <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
                     </div>
-                    <div class="col-sm-5" id="mapForm">
+                    <div class="col-sm-5 col-sm-offset-1" id="mapForm">
                     <!--Place your maps code here-->
                         <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
                     </div>
@@ -106,54 +106,57 @@
     <div class="container">
 
         <hr class="featurette-divider">
-        <div class="row">
-        <!-- First Featurette -->
-        <div class="featurette col-md-6" id="newsBox">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title" id="news-panel-title">Local News</h3>
-                </div>
-                <div class="panel-body" >
-                    <div class="list-group" id="newsContainer">
-                        <a href="#" class="list-group-item">
-                            <h4 class="list-group-item-heading"></h4>
-                            <p class="list-group-item-text"></p>
-                         </a>
-        
-                                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    <!--     <hr class="featurette-divider"> -->
 
-        <!-- Second Featurette -->
-        <div class="featurette col-md-6" id="weatherBox">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Local Weather</h3>
-                </div>
-                <div class="panel-body" id="weatherContainer">
-                    <p>This is where the weather items go</p>
-                </div>
+
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                    <h3 class="panel-title" >
+                        <a data-toggle="collapse" data-parent="#accordion" id="news-panel-title" href="#collapse1">Local News</a>
+                    </h3>
             </div>
-        </div>
-        </div>
-     <!--    <hr class="featurette-divider"> -->
-        <div class="row">
-        <!-- Third Featurette -->
-        <div class="featurette col-md-6" id="newCategoryBox">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Local Something or Other</h3>
-                </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+              <div class="panel-body" >
+                        <div class="list-group" id="newsContainer">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading"></h4>
+                                <p class="list-group-item-text"></p>
+                             </a>
+                        </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                 <h3 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Local Weather</a>
+                </h3>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+              <div class="panel-body">
+                   <div class="list-group" id="weatherContainer">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading"></h4>
+                                <p class="list-group-item-text"></p>
+                             </a>
+                        </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                 <h3 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Local Something or Other</a></h3>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
                 <div class="panel-body" id="newItemContainer">
                     <p></p>
                 </div>
             </div>
+          </div>
         </div>
-
+       
      <!--    <hr class="featurette-divider"> -->
 
         </div>
