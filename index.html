@@ -34,7 +34,9 @@
   src="https://code.jquery.com/jquery-3.1.1.js"
   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
   crossorigin="anonymous"></script>
-    <script src="http://maps.google.com/maps/api/js"></script>
+   <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRZI4dIrbRx_-KVnKL_qx-8DKUGDOm0y0&callback=initMap">
+    </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
   <script src="assets/javascript/app.js"></script>
   </head>
@@ -67,18 +69,7 @@
                 <button type="submit" class="btn btn-default" id="submitSearch">Submit</button>
                 <button type="submit" class="btn btn-default" id="submit_get_weather">Get Weather</button>
             </form>
-            
-             <!-- <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#about">About</a>
-                    </li>
-                    <li>
-                        <a href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul> -->
+
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -103,7 +94,7 @@
         </div>
     </header>
 
-    <!-- Page Content -->
+     <!-- Page Content -->
     <div class="container">
 
         <hr class="featurette-divider">
