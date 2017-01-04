@@ -21,7 +21,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
     border-color: #ddd;
 }
 
-
+.nogeo{
+	display: none;
+}
 
 
 #mapContainer{
