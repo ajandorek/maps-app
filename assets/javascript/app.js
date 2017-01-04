@@ -8,6 +8,19 @@ $(document).ready(function(){
   initMap();
 
   
+  $("#submit_get_weather").on("click", function(event){
+
+    event.preventDefault();
+
+    city = $("#searchText").val().trim();
+
+    //
+    return false
+   }); // end of submit_get_weather
+
+
+
+
 
   $("#submitSearch").on("click", function(event){
 
@@ -31,7 +44,7 @@ $(document).ready(function(){
     
 
     return false
-   });
+   }); // end of submitSearch - for map location
 
 
 function createMap(){
@@ -79,7 +92,9 @@ function initMap() {
   });
 }
 
-})
+}) // end of document ready
+
+
 
 //getNews function
 
