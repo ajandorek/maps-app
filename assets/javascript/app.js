@@ -13,8 +13,13 @@ $(document).ready(function(){
     event.preventDefault();
 
     city = $("#searchText").val().trim();
+    var queryURL_weather = "http://api.openweathermap.org/data/2.5/forecast/city?q=" + city + "&APPID=cd525757f3eeb5be1eefb85a523a2c53"
+    
+    $.ajax({ url: queryURL_weather, method: "GET" }).done(function(response) {
+      // var stuff = response.results[0].;
+      console.log("do something with this. like the next weather prediction");
+    }) // end of lambda function response
 
-    //
     return false
    }); // end of submit_get_weather
 
