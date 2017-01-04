@@ -5,20 +5,64 @@ $(document).ready(function(){
   var lng = "-97.742777";
   var city = "";
 
+  // weather map stuff below
+  var map;
+  var geoJSON;
+  var request;
+  var gettingData = false;
+  var openWeatherMapKey = "cd525757f3eeb5be1eefb85a523a2c53"
+  // weather map stuff above
+
+  function do_weather_map() {
+    var mapOptions = {
+      zoom: 9, //2 is higher
+      center: new google.maps.LatLng(lat,lng) // center: new google.maps.LatLng(5,-5)
+    };
+    map = new google.maps.Map(document.getElementById('mapForm'),
+        mapOptions);
+    // Add interaction listeners to make weather requests
+    google.maps.event.addListener(map, 'idle', checkIfDataRequested);
+    // Sets up and populates the info window with details
+    map.data.addListener('click', function(event) {
+      infowindow.setContent(
+       "<img src=" + event.feature.getProperty("icon") + ">"
+       + "<br /><strong>" + event.feature.getProperty("city") + "</strong>"
+       + "<br />" + event.feature.getProperty("temperature") + "&deg;C"
+       + "<br />" + event.feature.getProperty("weather")
+       );
+      infowindow.setOptions({
+          position:{
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng()
+          },
+          pixelOffset: {
+            width: 0,
+            height: -15
+          }
+        });
+      infowindow.open(map);
+    });
+  }
+
+
+
   initMap();
+
 
   
   $("#submitSearch").on("click", function(event){
 
     event.preventDefault();
 
-    city = $("#searchText").val().trim();
-    var queryURL_weather = "http://api.openweathermap.org/data/2.5/forecast/city?q=" + city + "&APPID=cd525757f3eeb5be1eefb85a523a2c53"
+    do_weather_map();
+
+    //city = $("#searchText").val().trim();
+    //var queryURL_weather = "http://api.openweathermap.org/data/2.5/forecast/city?q=" + city + "&APPID=cd525757f3eeb5be1eefb85a523a2c53"
     
-    $.ajax({ url: queryURL_weather, method: "GET" }).done(function(response) {
+    //$.ajax({ url: queryURL_weather, method: "GET" }).done(function(response) {
       // var stuff = response.results[0].;
-      console.log("do something with this. like the next weather prediction");
-    }) // end of lambda function response
+      //console.log("do something with this. like the next weather prediction");
+    //}) // end of lambda function response
 
     return false
    }); // end of submit_get_weather
