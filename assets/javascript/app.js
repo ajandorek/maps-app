@@ -48,7 +48,9 @@ $(document).ready(function(){
 
   initMap();
 
-  $("#submit_get_weather").on("click", function(event){
+
+  
+  $("#submitSearch").on("click", function(event){
 
     event.preventDefault();
 

@@ -61,8 +61,32 @@ div.row {
 
 
 
+body {
+    margin-top: 0px;
+}
+
+.navbar {
+	margin-bottom: 0px;
+}
+
+.navbar-fixed-top{
+	position: relative;
+	 z-index: 0;
+}
 
 @media only screen and (min-width: 800px){
+
+body {
+    margin-top: 50px;
+}
+
+.navbar-fixed-top
+{
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
 
 #mapContainer{
 	margin: 0;
