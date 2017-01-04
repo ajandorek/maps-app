@@ -37,6 +37,7 @@
    <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRZI4dIrbRx_-KVnKL_qx-8DKUGDOm0y0&callback=initMap">
     </script>
+  <script src="http://openlayers.org/api/OpenLayers.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
   <script src="assets/javascript/app.js"></script>
   </head>
@@ -120,17 +121,14 @@
           <div class="panel panel-default">
             <div class="panel-heading">
                  <h3 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Local Weather</a>
+                    <a data-toggle="collapse" data-parent="#accordion" id="weather-panel-title" href="#collapse2">Local Weather</a>
                 </h3>
             </div>
             <div id="collapse2" class="panel-collapse collapse">
               <div class="panel-body">
                    <div class="list-group" id="weatherContainer">
-                            <a href="#" class="list-group-item">
-                                <h4 class="list-group-item-heading"></h4>
-                                <p class="list-group-item-text"></p>
-                             </a>
-                        </div>
+                  
+                   </div>
               </div>
             </div>
           </div>

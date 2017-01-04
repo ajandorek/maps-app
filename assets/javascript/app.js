@@ -1,71 +1,59 @@
 
-$(document).ready(function(){
-
   var lat = "30.268034";
   var lng = "-97.742777";
   var city = "";
 
-  // weather map stuff below
-  var map;
-  var geoJSON;
-  var request;
-  var gettingData = false;
-  var openWeatherMapKey = "cd525757f3eeb5be1eefb85a523a2c53"
-  // weather map stuff above
-
-  function do_weather_map() {
-    var mapOptions = {
-      zoom: 9, //2 is higher
-      center: new google.maps.LatLng(lat,lng) // center: new google.maps.LatLng(5,-5)
-    };
-    map = new google.maps.Map(document.getElementById('mapForm'),
-        mapOptions);
-    // Add interaction listeners to make weather requests
-    google.maps.event.addListener(map, 'idle', checkIfDataRequested);
-    // Sets up and populates the info window with details
-    map.data.addListener('click', function(event) {
-      infowindow.setContent(
-       "<img src=" + event.feature.getProperty("icon") + ">"
-       + "<br /><strong>" + event.feature.getProperty("city") + "</strong>"
-       + "<br />" + event.feature.getProperty("temperature") + "&deg;C"
-       + "<br />" + event.feature.getProperty("weather")
-       );
-      infowindow.setOptions({
-          position:{
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng()
-          },
-          pixelOffset: {
-            width: 0,
-            height: -15
-          }
-        });
-      infowindow.open(map);
-    });
-  }
 
 
 
-  initMap();
+$(document).ready(function(){
 
+ 
 
   
-  $("#submitSearch").on("click", function(event){
+  // $("#submitSearch").on("click", function(event){
 
-    event.preventDefault();
+  //   event.preventDefault();
 
-    do_weather_map();
 
-    //city = $("#searchText").val().trim();
-    //var queryURL_weather = "http://api.openweathermap.org/data/2.5/forecast/city?q=" + city + "&APPID=cd525757f3eeb5be1eefb85a523a2c53"
+  //       //Center of map
+  //   var lonlat = new OpenLayers.LonLat(lng, lat);
+
+  //   var map = new OpenLayers.Map("mapForm");
+  //   // Create OSM overlays
+  //   var mapnik = new OpenLayers.Layer.OSM();
+
+
+  //   // city = $("#searchText").val().trim();
+  //   // var queryURL_weather = "http://api.openweathermap.org/data/2.5/forecast/city?q=" + city + "&APPID=cd525757f3eeb5be1eefb85a523a2c53"
     
-    //$.ajax({ url: queryURL_weather, method: "GET" }).done(function(response) {
-      // var stuff = response.results[0].;
-      //console.log("do something with this. like the next weather prediction");
-    //}) // end of lambda function response
+  //   // $.ajax({ url: queryURL_weather, method: "GET" }).done(function(response) {
+  //    var layer_cloud = new OpenLayers.Layer.XYZ(
+  //       "clouds",
+  //       "http://${s}.tile.openweathermap.org/map/clouds/${z}/${x}/${y}.png",
+  //       {
+  //           isBaseLayer: false,
+  //           opacity: 0.7,
+  //           sphericalMercator: true
+  //       }
+  //   );
 
-    return false
-   }); // end of submit_get_weather
+  //   var layer_precipitation = new OpenLayers.Layer.XYZ(
+  //       "precipitation",
+  //       "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png",
+  //       {
+  //           isBaseLayer: false,
+  //           opacity: 0.7,
+  //           sphericalMercator: true
+  //       }
+  //   );
+
+
+  //   map.addLayers([mapnik, layer_precipitation, layer_cloud]);
+  //  // }) // end of lambda function response
+
+  //   return false
+  //  }); // end of submit_get_weather
 
 
 
@@ -91,6 +79,7 @@ $(document).ready(function(){
     //get the news for the city entered in the seach box
     getNews(city);
     
+    getWeather(city);
 
     return false
    }); // end of submitSearch - for map location
@@ -113,6 +102,8 @@ function initMap() {
   zoom: 10
   });
 
+
+
   GMaps.geolocate({
   success: function(position) {
     console.log(position.city)
@@ -130,7 +121,7 @@ function initMap() {
       getNews(city);
       //
       //add call to get weather here
-      //
+      getWeather(city);
 
     })
   },
@@ -140,7 +131,9 @@ function initMap() {
   }
 
   });
-}
+};
+
+ initMap();
 
 }) // end of document ready
 
@@ -184,6 +177,8 @@ function getNews(city){
   queryURL = queryURLBase + city;
 
   queryURL = queryURL + "&begin_date=" + startDate;
+
+  queryURL = queryURL.replace(/\s+/g, '+');
 
   // log the url
   console.log("------------------------------------")
@@ -299,3 +294,72 @@ function clearNewsVariables(){
   articleArray ="";
   $("#newsContainer").html("");  //empty() ?
 };
+
+
+
+
+//function to get weather
+
+function getWeather(city){
+
+   clearWeatherVariables();
+  // Add City name to the News pannel Title
+  $("#weather-panel-title").html("Local Weather for " + city);
+
+
+ var weatherQuery = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lng+"&appid=f84bde1340d8fb2ecf8f1802eedc0991&units=imperial";
+  $.ajax({url: weatherQuery, method: "GET"}) 
+    .done(function(result) {
+      console.log(result);
+       var weather=result;
+
+       var temp= "Current Temperature: "+ weather.main.temp+" F";
+       var humidity = "Humidity: "+weather.main.humidity+"%";
+       var tempMax = weather.main.temp_max;
+       var tempMin = weather.main.temp_min;
+       var cloudCover = "Cloud Cover: "+weather.clouds.all+"%";
+       var windSpeed = "Wind Speed: "+weather.wind.speed+" mph";
+       //var rain3hr = "3 Hour Rainfall"+weather.rain.3h;
+       var description = "Current Weather: "+weather.weather[0].description;
+
+
+
+
+
+        var weatherBox = $("<div>");
+        weatherBox.attr("class", "list-group-item");
+
+          //create weather description header in panel-heading
+          var currentDesc =$("<h4>");
+            currentDesc.attr("class", "panel-heading articleTitle");
+            currentDesc.css("font-weight","Bold");
+            currentDesc.append(description);
+
+            //create article date in panel
+          var currentCond = $("<ul>");
+            currentCond.attr("class", "list-group-item-text");
+
+            currentCond.append("<li>"+ temp +"</li>");
+            currentCond.append("<li>"+  humidity+"</li>");
+            currentCond.append("<li>"+ windSpeed+"</li>");
+            currentCond.append("<li>"+  cloudCover+"</li>");
+            //currentCond.append("<li>", rain3hr);
+
+            weatherBox.append(currentDesc);
+            weatherBox.append(currentCond);
+
+  //write weather to html
+    $("#weatherContainer").html(weatherBox);
+
+      }).fail(function(err) {
+        throw err;
+    });
+
+  function clearWeatherVariables(){
+  
+  weather ="";
+  weatherBox="";
+  $("#weatherContainer").html("");  //empty() ?
+};
+
+}
