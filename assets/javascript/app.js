@@ -11,6 +11,7 @@ $(document).ready(function(){
  
 
   
+
   // $("#submitSearch").on("click", function(event){
 
   //   event.preventDefault();
@@ -22,6 +23,7 @@ $(document).ready(function(){
   //   var map = new OpenLayers.Map("mapForm");
   //   // Create OSM overlays
   //   var mapnik = new OpenLayers.Layer.OSM();
+
 
 
   //   // city = $("#searchText").val().trim();
@@ -49,11 +51,14 @@ $(document).ready(function(){
   //   );
 
 
+
   //   map.addLayers([mapnik, layer_precipitation, layer_cloud]);
   //  // }) // end of lambda function response
 
   //   return false
   //  }); // end of submit_get_weather
+
+
 
 
 
@@ -74,6 +79,7 @@ $(document).ready(function(){
       console.log(lng);
 
       createMap();
+      do_weather_map();
     })
 
     //get the news for the city entered in the seach box
