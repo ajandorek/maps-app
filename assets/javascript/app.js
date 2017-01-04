@@ -32,7 +32,7 @@ $(document).ready(function(){
     event.preventDefault();
 
     city = $("#searchText").val().trim();
-
+    $(".nogeo").css("display", "none");
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyCRZI4dIrbRx_-KVnKL_qx-8DKUGDOm0y0";
 
     $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
@@ -91,7 +91,8 @@ function initMap() {
     })
   },
   error: function(error) {
-    alert('Geolocation failed: '+error.message);
+    //alert('Geolocation failed: '+error.message);
+    $(".nogeo").css("display", "block");
   }
 
   });
