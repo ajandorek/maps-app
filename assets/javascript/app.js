@@ -50,11 +50,11 @@ $(document).ready(function(){
 
 
   
-  $("#submitSearch").on("click", function(event){
+  //$("#submitSearch").on("click", function(event){
 
-    event.preventDefault();
+    //event.preventDefault();
 
-    do_weather_map();
+    //do_weather_map();
 
     //city = $("#searchText").val().trim();
     //var queryURL_weather = "http://api.openweathermap.org/data/2.5/forecast/city?q=" + city + "&APPID=cd525757f3eeb5be1eefb85a523a2c53"
@@ -64,8 +64,8 @@ $(document).ready(function(){
       //console.log("do something with this. like the next weather prediction");
     //}) // end of lambda function response
 
-    return false
-   }); // end of submit_get_weather
+    //return false
+   //}); // end of submit_get_weather
 
 
 
@@ -86,6 +86,7 @@ $(document).ready(function(){
       console.log(lng);
 
       createMap();
+      do_weather_map();
     })
 
     //get the news for the city entered in the seach box
