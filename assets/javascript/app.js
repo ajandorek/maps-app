@@ -141,7 +141,7 @@ function initMap() {
 
  initMap();
 
-}) // end of document ready
+//}) // end of document ready
 
 
 
@@ -207,6 +207,8 @@ function getNews(city){
 
 
 function displayArticles(){
+
+  var articleGroup="";
 
   for (j=0; j < 5; j++) {
   
@@ -319,7 +321,7 @@ function getWeather(city){
       console.log(result);
        var weather=result;
 
-       var temp= "Current Temperature: "+ weather.main.temp+" F";
+       var temp= "Current Temperature: "+ weather.main.temp+" &#8457;";
        var humidity = "Humidity: "+weather.main.humidity+"%";
        var tempMax = weather.main.temp_max;
        var tempMin = weather.main.temp_min;
@@ -368,4 +370,8 @@ function getWeather(city){
   $("#weatherContainer").html("");  //empty() ?
 };
 
-}
+};
+
+
+
+}); // end of document ready
