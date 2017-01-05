@@ -121,6 +121,20 @@ function initMap() {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         });
+
+ var wmap = new google.maps.Map(document.getElementById('mapForm'), {
+          zoom: 10,
+          center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        });
+
+   var trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(wmap);
+
+
+
         var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
             $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
               city = response.results[0].address_components[3].long_name;
@@ -140,6 +154,8 @@ function initMap() {
     }
 
   });
+
+ 
 };
 
 
