@@ -45,7 +45,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 	background-color: #eaeaea;
 }
 
-#news-panel-title {
+#news-panel-title, #weather-panel-title {
 	text-transform:capitalize;
 }
 

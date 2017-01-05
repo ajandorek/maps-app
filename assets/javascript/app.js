@@ -6,7 +6,7 @@
 
 
 
-$(document).ready(function(){
+//$(document).ready(function(){
 
  
 
@@ -72,23 +72,26 @@ $(document).ready(function(){
     $(".nogeo").css("display", "none");
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyCRZI4dIrbRx_-KVnKL_qx-8DKUGDOm0y0";
 
-    $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
-      lat = response.results[0].geometry.location.lat;
-      lng = response.results[0].geometry.location.lng;
-      console.log(lat);
-      console.log(lng);
+      $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
+        lat = response.results[0].geometry.location.lat;
+        lng = response.results[0].geometry.location.lng;
+        console.log(lat);
+        console.log(lng);
 
-      createMap();
-      do_weather_map();
-    })
+        createMap();
+        console.log("createMap just ran from the ajax call under the #submitsearch onclick funtion");
+       // do_weather_map();
+      })
 
     //get the news for the city entered in the seach box
     getNews(city);
-    
+    console.log("getNews just ran from the  under the #submitsearch onclick funtion");
     getWeather(city);
-
+     console.log("getweather just ran from the  under the #submitsearch onclick funtion");
     return false
    }); // end of submitSearch - for map location
+
+
 
 
 function createMap(){
@@ -98,54 +101,53 @@ function createMap(){
   lng: lng,
   zoom: 10
   });
-}
+};
 
 function initMap() {
- var map = new GMaps({
-  div: '#mapContainer',
-  lat: lat,
-  lng: lng,
-  zoom: 10
-  });
+   var map = new GMaps({
+    div: '#mapContainer',
+    lat: lat,
+    lng: lng,
+    zoom: 10
+    });
 
 
 
   GMaps.geolocate({
-  success: function(position) {
-    console.log(position.city)
-    map.setCenter(position.coords.latitude, position.coords.longitude);
-    map.addMarker ({
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    });
-    var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
-    $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
-      city = response.results[0].address_components[3].long_name;
-      console.log(city);
+    success: function(position) {
+      console.log(position.city)
+        map.setCenter(position.coords.latitude, position.coords.longitude);
+        map.addMarker ({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
+            $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
+              city = response.results[0].address_components[3].long_name;
+              console.log(city);
 
-      //getNews for Geolocated City
-      getNews(city);
-      //
-      //add call to get weather here
-      getWeather(city);
+              //getNews for Geolocated City
+              getNews(city);
+              //
+              //add call to get weather here
+              getWeather(city);
 
-    })
-  },
-  error: function(error) {
-    //alert('Geolocation failed: '+error.message);
-    $(".nogeo").css("display", "block");
-  }
+              });
+    },
+    error: function(error) {
+      //alert('Geolocation failed: '+error.message);
+      $(".nogeo").css("display", "block");
+    }
 
   });
 };
 
- initMap();
+
 
 //}) // end of document ready
+//}); // end of document ready
 
-
-
-//getNews function
+////getNews function
 
 function getNews(city){
 
@@ -206,7 +208,7 @@ function getNews(city){
   $("#news-panel-title").html("Local News for " + city);
 
 
-function displayArticles(){
+  function displayArticles(){
 
   var articleGroup="";
 
@@ -289,12 +291,12 @@ function displayArticles(){
     // console.log(articleAbstract);
     // console.log(articleLink);
 
-  }; //for "j" loop end
+    }; //for "j" loop end
 
-}; //end display articles
+  }; //end display articles
 
 
-} //function getNews
+}; //function getNews
 
 function clearNewsVariables(){
   
@@ -362,16 +364,17 @@ function getWeather(city){
       }).fail(function(err) {
         throw err;
     });
+};//end get weather
+
 
   function clearWeatherVariables(){
   
   weather ="";
   weatherBox="";
   $("#weatherContainer").html("");  //empty() ?
-};
+  };
 
-};
+ initMap();
+  console.log("initMap just ran from the  under the documentready");
 
 
-
-}); // end of document ready
