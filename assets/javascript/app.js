@@ -413,3 +413,11 @@ function getWeather(city){
   weatherBox="";
   $("#weatherContainer").html("");  //empty() ?
   };
+
+// $(document).ready(function(){
+
+//  initMap();
+//   console.log("initMap just ran from the  under the documentready");
+
+
+// });
