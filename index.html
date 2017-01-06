@@ -66,7 +66,7 @@
 
             <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="searchText" placeholder="Search">
+                    <input type="text" class="form-control" id="searchText" placeholder="City, State">
                 </div>
 
                 <button type="button" class="btn btn-default" id="submitSearch">Search</button>
@@ -74,7 +74,11 @@
             </form>
   <div class="alert alert-warning alert-dismissable nogeo">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-    You have chosen to block geolocation. Please enter a City to continue.
+    We cannot locate you via geolocation. Please enter a City to continue.
+  </div>
+  <div class="alert alert-warning alert-dismissable nocity">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    The City you have entered is not valid (does not exist or misspelled). Please try again.
   </div>
             </div>
             <!-- /.navbar-collapse -->

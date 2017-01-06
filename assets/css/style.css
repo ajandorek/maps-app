@@ -25,6 +25,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 	display: none;
 }
 
+.nocity {
+	display: none;
+}
 
 #map{
 	height: 400px;
@@ -65,8 +68,9 @@ div.row {
 
 body {
     margin-top: 0px;
-	font-family: 'Roboto Mono', monospace;
+	
 	font-family: 'Proza Libre', sans-serif;
+	font-family: 'Roboto Mono', monospace;
 }
 
 .navbar {
