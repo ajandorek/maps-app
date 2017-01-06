@@ -15,6 +15,13 @@ var pos="";
 
     event.preventDefault();
 
+    //remove focus immediately from the search button
+    $("#submitSearch").blur();
+
+    //turn off the visual "on" state for traffic button
+     $("#trafficButton").removeClass("buttonOn");
+
+
     city = $("#searchText").val().trim();
     $(".nocity").css("display", "none");
      $(".nogeo").css("display", "none");
@@ -126,6 +133,9 @@ function trafficMap(){
           $("#trafficButton").on("click", function(){
                   trafficLayer.setMap(map);
 
+                  //add class to show that traffic is "on"
+                   $("#trafficButton").addClass("buttonOn");
+
             });
 
 };
@@ -138,6 +148,11 @@ function clearMap(){
          
           $("#normalButton").on("click", function(){
               trafficLayer.setMap(null);
+
+              //turn off the visual "on" for the traffic button
+                $("#trafficButton").removeClass("buttonOn");
+              //immediately remove the focus state for the normal/reset map button
+                $("#normalButton").blur();
             });
 
 };
