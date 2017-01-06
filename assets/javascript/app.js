@@ -6,6 +6,7 @@
  var map="";
 var pos="";
 var recenter="";
+
 //button styling for mobile
 document.addEventListener("touchstart", function(){}, true);
 window.addEventListener("resize", recenterMap);
@@ -34,14 +35,21 @@ window.addEventListener("resize", recenterMap);
         lng = response.results[0].geometry.location.lng;
         console.log(lat);
         console.log(lng);
+        pos = {
+              lat: response.results[0].geometry.location.lat,
+              lng: response.results[0].geometry.location.lng
+            };
          map = new google.maps.Map(document.getElementById('map'), {
           center: {lat, lng},
           zoom: 10
         });
           $('#searchText').val('');
            $('#searchText').attr("placeholder", "City, State");
-       trafficMap();
+            trafficMap();
             clearMap();
+                      $("#recenterButton").on("click", function(){
+              recenterMap();
+            });
         } else {
            $(".nocity").css("display", "block");
            return false;
