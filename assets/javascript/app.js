@@ -70,7 +70,7 @@
 
     city = $("#searchText").val().trim();
     $(".nogeo").css("display", "none");
-    var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyCRZI4dIrbRx_-KVnKL_qx-8DKUGDOm0y0";
+    var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
 
       $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
         lat = response.results[0].geometry.location.lat;
@@ -80,15 +80,15 @@
 
         createMap();
         console.log("createMap just ran from the ajax call under the #submitsearch onclick funtion");
-       // do_weather_map();
+      
       })
-
+ 
     //get the news for the city entered in the seach box
     getNews(city);
     console.log("getNews just ran from the  under the #submitsearch onclick funtion");
     getWeather(city);
      console.log("getweather just ran from the  under the #submitsearch onclick funtion");
-    return false
+    return false;
    }); // end of submitSearch - for map location
 
 
@@ -101,6 +101,9 @@ function createMap(){
   lng: lng,
   zoom: 10
   });
+
+
+
 };
 
 function initMap() {
@@ -121,6 +124,22 @@ function initMap() {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         });
+
+        var wmap = new google.maps.Map(document.getElementById('mapForm'), {
+          zoom: 10,
+          center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        });
+
+         var trafficLayer = new google.maps.TrafficLayer();
+          trafficLayer.setMap(wmap);
+
+
+
+
+
         var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
             $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
               city = response.results[0].address_components[3].long_name;
@@ -140,7 +159,28 @@ function initMap() {
     }
 
   });
+  return false;
+ 
 };
+
+
+function weatherMap(){
+
+ var wmap = new google.maps.Map(document.getElementById('mapForm'), {
+          zoom: 10,
+          center: {
+          lat: lat,
+          lng: lng
+        }
+        });
+
+   var trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(wmap);
+
+
+};
+
+
 
 
 
@@ -374,7 +414,10 @@ function getWeather(city){
   $("#weatherContainer").html("");  //empty() ?
   };
 
- initMap();
-  console.log("initMap just ran from the  under the documentready");
+// $(document).ready(function(){
+
+//  initMap();
+//   console.log("initMap just ran from the  under the documentready");
 
 
+// });
