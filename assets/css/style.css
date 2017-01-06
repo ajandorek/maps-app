@@ -39,7 +39,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 }
 
 #mapForm {
-	min-height: 400px;
+/*	min-height: 400px;*/
 	outline: solid black 1px;
 	margin: auto;
 	margin-top: 5px;
@@ -105,13 +105,13 @@ body {
 #mapContainer{
 	margin: 0;
 }
-
+/*
 #mapForm {
 margin-top: 0;
 margin-bottom: 0;
 margin-right: 0;
-    margin-left: 8.33333333%
-}
+
+}*/
 
 
 

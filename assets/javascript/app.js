@@ -17,6 +17,7 @@ var pos="";
 
     city = $("#searchText").val().trim();
     $(".nocity").css("display", "none");
+     $(".nogeo").css("display", "none");
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
 
       $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
@@ -32,7 +33,8 @@ var pos="";
         });
           $('#searchText').val('');
            $('#searchText').attr("placeholder", "City, State");
-       
+       trafficMap();
+            clearMap();
         } else {
            $(".nocity").css("display", "block");
            return false;
