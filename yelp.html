@@ -1,0 +1,59 @@
+
+<!doctype html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
+        <script src="assets/javascript/oauth-signature.min.js"></script>
+
+        <!-- <script src="https://raw.githubusercontent.com/bettiolo/oauth-signature-js/master/dist/oauth-signature.min.js"></script> -->
+    </head>
+    <body ng-app="plunker">
+        <div  ng-controller="MainCtrl">
+            <p><date-input name="info.name" message="info.message"></date-input></p>
+            <ul>
+                <li data-ng-repeat="business in businesses">
+                    {{business.name}}
+                </li>
+            </ul>
+        </div>
+        <script>
+            function randomString(length, chars) {
+                var result = '';
+                for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+                return result;
+            }
+
+            var app = angular.module('plunker', []);
+            app.controller('MainCtrl', ['$scope', 'MyYelpAPI', function($scope, MyYelpAPI) {
+                $scope.businesses = [];
+                MyYelpAPI.retrieveYelp('', function(data) {
+                    $scope.businesses = data.businesses;
+
+                });
+
+            }]).factory("MyYelpAPI", function($http) {
+                return {
+                    "retrieveYelp": function(name, callback) {
+                        var method = 'GET';
+                        var url = 'http://api.yelp.com/v2/search';
+                        var params = {
+                                callback: 'angular.callbacks._0',
+                                location: 'Austin',
+                                oauth_consumer_key: 'WQsQwze98OsJk6tZlUWtWA', //Consumer Key
+                                oauth_token: 'eemoLGCRg6NHIY2Smkd8BSXZ4DeGh4tj', //Token
+                                oauth_signature_method: "HMAC-SHA1",
+                                oauth_timestamp: new Date().getTime(),
+                                oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                                term: 'food'
+                            };
+                        var consumerSecret = '1I-mAH8p88GpuE0u0x0s3xxENaQ'; //Consumer Secret
+                        var tokenSecret = 'Tk-4NUC4Dzw0cFG_Gryog_5Vmh8'; //Token Secret
+                        var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret, { encodeSignature: false});
+                        params['oauth_signature'] = signature;
+                        $http.jsonp(url, {params: params}).success(callback);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
