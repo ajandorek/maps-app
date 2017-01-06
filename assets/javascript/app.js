@@ -2,9 +2,9 @@
   var lat = "30.268034";
   var lng = "-97.742777";
   var city = "";
-
-
-
+  var trafficLayer ="";
+ var map="";
+var pos="";
 
 //$(document).ready(function(){
 
@@ -94,94 +94,138 @@
 
 
 
-function createMap(){
- var map = new GMaps({
-  div: '#mapContainer',
-  lat: lat,
-  lng: lng,
-  zoom: 10
-  });
+// function createMap(){
+//  var map = new GMaps({
+//   div: '#mapContainer',
+//   lat: lat,
+//   lng: lng,
+//   zoom: 10
+//   });
 
 
 
-};
-
-function initMap() {
-   var map = new GMaps({
-    div: '#mapContainer',
-    lat: lat,
-    lng: lng,
-    zoom: 10
-    });
+// };
 
 
 
-  GMaps.geolocate({
-    success: function(position) {
-      console.log(position.city)
-        map.setCenter(position.coords.latitude, position.coords.longitude);
-        map.addMarker ({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
+
+  function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 30.268034, lng: -97.742777},
+          zoom: 10
         });
 
-        var wmap = new google.maps.Map(document.getElementById('mapForm'), {
-          zoom: 10,
-          center: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-        });
 
-         var trafficLayer = new google.maps.TrafficLayer();
-          trafficLayer.setMap(wmap);
-
-
-
-
-
-        var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          //set city name
+            var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
             $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
               city = response.results[0].address_components[3].long_name;
               console.log(city);
-
-              //getNews for Geolocated City
+                                      //getNews for Geolocated City
               getNews(city);
               //
               //add call to get weather here
               getWeather(city);
-
               });
-    },
-    error: function(error) {
-      //alert('Geolocation failed: '+error.message);
-      $(".nogeo").css("display", "block");
-    }
-
-  });
-  return false;
- 
-};
 
 
-function weatherMap(){
 
- var wmap = new google.maps.Map(document.getElementById('mapForm'), {
-          zoom: 10,
-          center: {
-          lat: lat,
-          lng: lng
+            var marker = new google.maps.Marker({
+              position: pos,
+              map: map
+            });
+
+
+
+           map.setCenter(pos);
+            trafficMap();
+            clearMap();
+
+
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
         }
-        });
-
-   var trafficLayer = new google.maps.TrafficLayer();
-        trafficLayer.setMap(wmap);
-
-
 };
 
 
 
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+         //alert('Geolocation failed: '+error.message);
+      $(".nogeo").css("display", "block");
+      };
+
+
+
+
+//         var tmap = new google.maps.Map(document.getElementById('map'), {
+//           zoom: 10,
+//           center: {
+//           lat: position.coords.latitude,
+//           lng: position.coords.longitude
+//         }
+//         });
+
+//          var trafficLayer = new google.maps.TrafficLayer();
+//           trafficLayer.setMap(map);
+
+
+
+
+
+//         // var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
+//         //     $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
+//         //       city = response.results[0].address_components[3].long_name;
+//         //       console.log(city);
+
+
+
+//               });
+//     },
+//     error: function(error) {
+//       //alert('Geolocation failed: '+error.message);
+//       $(".nogeo").css("display", "block");
+//     }
+
+//   });
+//   return false;
+ 
+// };
+
+
+function trafficMap(){
+
+       
+        trafficLayer = new google.maps.TrafficLayer();
+         
+          $("#trafficButton").on("click", function(){
+                  trafficLayer.setMap(map);
+
+            });
+
+};
+
+
+function clearMap(){
+
+       
+    
+         
+          $("#normalButton").on("click", function(){
+              trafficLayer.setMap(null);
+            });
+
+};
 
 
 //}) // end of document ready
@@ -414,10 +458,10 @@ function getWeather(city){
   $("#weatherContainer").html("");  //empty() ?
   };
 
-// $(document).ready(function(){
+$(document).ready(function(){
 
-//  initMap();
-//   console.log("initMap just ran from the  under the documentready");
+ initMap();
+  console.log("initMap just ran from the  under the documentready");
 
 
-// });
+});

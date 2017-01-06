@@ -87,11 +87,14 @@
         <div class="headline">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6" id="mapContainer">
+                    <div class="col-sm-6" id="map">
                     <!--Place your maps code here-->
                         <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
                     </div>
                     <div class="col-sm-5 col-sm-offset-1" id="mapForm">
+                      <button type="button" class="btn btn-default" id="normalButton">Clear Map</button>
+                       <button type="button" class="btn btn-default" id="trafficButton">Traffic</button>
+
                     <!--Place your maps code here-->
                         <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
                     </div>
@@ -179,17 +182,16 @@
 <!-- jQuery -->
     <script src="assets/javascript/jquery.js"></script>
 
-
+  <script src="assets/javascript/app.js"></script>
 <!-- Custom JavaScript -->
-   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGbh2qE4hTFk6gHI4OzTUiv1WchM4OmDw&callback=initMap">
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGbh2qE4hTFk6gHI4OzTUiv1WchM4OmDw">
     </script>
 
 
 
   <script src="http://openlayers.org/api/OpenLayers.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
-  <script src="assets/javascript/app.js"></script>
+
 
 </body>
 
