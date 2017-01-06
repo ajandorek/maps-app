@@ -69,7 +69,7 @@
                     <input type="text" class="form-control" id="searchText" placeholder="City, State">
                 </div>
 
-                <button type="button" class="btn btn-default" id="submitSearch">Search</button>
+                <button type="submit" class="btn btn-default" id="submitSearch">Search</button>
       
             </form>
   <div class="alert alert-warning alert-dismissable nogeo">
@@ -91,11 +91,13 @@
         <div class="headline">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6" id="map">
+                    <div class="col-sm-12" id="map">
                     <!--Place your maps code here-->
                         <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
                     </div>
-                    <div class="col-sm-5 col-sm-offset-1" id="mapForm">
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" id="mapForm">
                       <button type="button" class="btn btn-default" id="normalButton">Clear Map</button>
                        <button type="button" class="btn btn-default" id="trafficButton">Traffic</button>
 
