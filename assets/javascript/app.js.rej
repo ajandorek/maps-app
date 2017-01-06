@@ -1,0 +1,12 @@
+diff a/assets/javascript/app.js b/assets/javascript/app.js	(rejected hunks)
+@@ -92,7 +92,9 @@
+   });
+ }
+ 
+-})
++}) // end of document ready
++
++
+ 
+ //getNews function
+ 

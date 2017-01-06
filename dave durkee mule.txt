@@ -1,0 +1,8 @@
+
+My key for the open weather API is cd525757f3eeb5be1eefb85a523a2c53
+http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID={APIKEY}
+
+http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=cd525757f3eeb5be1eefb85a523a2c53
+
+
+http://api.openweathermap.org/data/2.5/forecast/city?q=Fort Atkinson, WI&APPID=cd525757f3eeb5be1eefb85a523a2c53
