@@ -5,10 +5,10 @@
   var trafficLayer ="";
  var map="";
 var pos="";
-
-
-
-
+var recenter="";
+//button styling for mobile
+document.addEventListener("touchstart", function(){}, true);
+window.addEventListener("resize", recenterMap);
 
 
   $("#submitSearch").on("click", function(event){
@@ -60,7 +60,6 @@ var pos="";
 
 
 
-
   function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 30.268034, lng: -97.742777},
@@ -88,7 +87,9 @@ var pos="";
            map.setCenter(pos);
             trafficMap();
             clearMap();
-
+          $("#recenterButton").on("click", function(){
+              recenterMap();
+            });
 
           }, function() {
               $(".nogeo").css("display", "block");
@@ -132,13 +133,22 @@ function trafficMap(){
          
           $("#trafficButton").on("click", function(){
                   trafficLayer.setMap(map);
-
+                 
                   //add class to show that traffic is "on"
                    $("#trafficButton").addClass("buttonOn");
 
             });
 
 };
+
+
+function recenterMap(){
+
+      map.setCenter(pos);
+
+
+};
+
 
 
 function clearMap(){
@@ -219,7 +229,7 @@ function getNews(city){
     });
   
   // Add City name to the News pannel Title
-  $("#news-panel-title").html("Local News for " + city);
+  $("#news-panel-title").html("Local News for " + city +"  <span class='caret'></span>");
 
 
   function displayArticles(){
@@ -299,11 +309,6 @@ function getNews(city){
   //write article container to html
     $("#newsContainer").append(articleBox);
  
-    // console.log(headline);
-    // console.log(byline);
-    // console.log(articleDate);
-    // console.log(articleAbstract);
-    // console.log(articleLink);
 
     }; //for "j" loop end
 
@@ -328,7 +333,7 @@ function getWeather(city){
 
    clearWeatherVariables();
   // Add City name to the News pannel Title
-  $("#weather-panel-title").html("Local Weather for " + city);
+  $("#weather-panel-title").html("Local Weather for " + city+"  <span class='caret'></span>");
 
 
  var weatherQuery = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lng+"&appid=f84bde1340d8fb2ecf8f1802eedc0991&units=imperial";
@@ -391,7 +396,6 @@ function getWeather(city){
 $(document).ready(function(){
 
  initMap();
-  console.log("initMap just ran from the  under the documentready");
 
 
 });
