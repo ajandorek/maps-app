@@ -6,59 +6,6 @@
  var map="";
 var pos="";
 
-//$(document).ready(function(){
-
- 
-
-  
-
-  // $("#submitSearch").on("click", function(event){
-
-  //   event.preventDefault();
-
-
-  //       //Center of map
-  //   var lonlat = new OpenLayers.LonLat(lng, lat);
-
-  //   var map = new OpenLayers.Map("mapForm");
-  //   // Create OSM overlays
-  //   var mapnik = new OpenLayers.Layer.OSM();
-
-
-
-  //   // city = $("#searchText").val().trim();
-  //   // var queryURL_weather = "http://api.openweathermap.org/data/2.5/forecast/city?q=" + city + "&APPID=cd525757f3eeb5be1eefb85a523a2c53"
-    
-  //   // $.ajax({ url: queryURL_weather, method: "GET" }).done(function(response) {
-  //    var layer_cloud = new OpenLayers.Layer.XYZ(
-  //       "clouds",
-  //       "http://${s}.tile.openweathermap.org/map/clouds/${z}/${x}/${y}.png",
-  //       {
-  //           isBaseLayer: false,
-  //           opacity: 0.7,
-  //           sphericalMercator: true
-  //       }
-  //   );
-
-  //   var layer_precipitation = new OpenLayers.Layer.XYZ(
-  //       "precipitation",
-  //       "http://${s}.tile.openweathermap.org/map/precipitation/${z}/${x}/${y}.png",
-  //       {
-  //           isBaseLayer: false,
-  //           opacity: 0.7,
-  //           sphericalMercator: true
-  //       }
-  //   );
-
-
-
-  //   map.addLayers([mapnik, layer_precipitation, layer_cloud]);
-  //  // }) // end of lambda function response
-
-  //   return false
-  //  }); // end of submit_get_weather
-
-
 
 
 
@@ -69,42 +16,38 @@ var pos="";
     event.preventDefault();
 
     city = $("#searchText").val().trim();
-    $(".nogeo").css("display", "none");
+    $(".nocity").css("display", "none");
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
 
       $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
+
+        if (typeof response.results[0] != 'undefined'){
         lat = response.results[0].geometry.location.lat;
         lng = response.results[0].geometry.location.lng;
         console.log(lat);
         console.log(lng);
-
-        createMap();
-        console.log("createMap just ran from the ajax call under the #submitsearch onclick funtion");
+         map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat, lng},
+          zoom: 10
+        });
+          $('#searchText').val('');
+           $('#searchText').attr("placeholder", "City, State");
+       
+        } else {
+           $(".nocity").css("display", "block");
+           return false;
+        }
       
       })
  
     //get the news for the city entered in the seach box
     getNews(city);
-    console.log("getNews just ran from the  under the #submitsearch onclick funtion");
+ 
     getWeather(city);
-     console.log("getweather just ran from the  under the #submitsearch onclick funtion");
+
     return false;
    }); // end of submitSearch - for map location
 
-
-
-
-// function createMap(){
-//  var map = new GMaps({
-//   div: '#mapContainer',
-//   lat: lat,
-//   lng: lng,
-//   zoom: 10
-//   });
-
-
-
-// };
 
 
 
@@ -124,18 +67,7 @@ var pos="";
               lng: position.coords.longitude
             };
           //set city name
-            var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
-            $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
-              city = response.results[0].address_components[3].long_name;
-              console.log(city);
-                                      //getNews for Geolocated City
-              getNews(city);
-              //
-              //add call to get weather here
-              getWeather(city);
-              });
-
-
+           setCityName();
 
             var marker = new google.maps.Marker({
               position: pos,
@@ -150,11 +82,11 @@ var pos="";
 
 
           }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
+              $(".nogeo").css("display", "block");
           });
         } else {
           // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
+            $(".nogeo").css("display", "block");
         }
 };
 
@@ -167,40 +99,21 @@ var pos="";
 
 
 
-
-//         var tmap = new google.maps.Map(document.getElementById('map'), {
-//           zoom: 10,
-//           center: {
-//           lat: position.coords.latitude,
-//           lng: position.coords.longitude
-//         }
-//         });
-
-//          var trafficLayer = new google.maps.TrafficLayer();
-//           trafficLayer.setMap(map);
-
-
+function setCityName(){
+       var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng+ "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
+            $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
+              city = response.results[0].address_components[3].long_name;
+              console.log(city);
+                                      //getNews for Geolocated City
+              getNews(city);
+              //
+              //add call to get weather here
+              getWeather(city);
+              });
 
 
 
-//         // var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
-//         //     $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
-//         //       city = response.results[0].address_components[3].long_name;
-//         //       console.log(city);
-
-
-
-//               });
-//     },
-//     error: function(error) {
-//       //alert('Geolocation failed: '+error.message);
-//       $(".nogeo").css("display", "block");
-//     }
-
-//   });
-//   return false;
- 
-// };
+};
 
 
 function trafficMap(){
@@ -252,7 +165,7 @@ function getNews(city){
 
   // Based on the city 
 
-  var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey + "&q=";
+  var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey + "&sort=newest&q=";
 
   
 
