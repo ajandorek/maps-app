@@ -3,194 +3,210 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An Interactive Map for Weather, News, and more!">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An Interactive Map for Weather, News, and more!">
+    <meta name="author" content="">
 
-  <!--favicon code -->
-  <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <!-- end favicon code -->
+    <!--favicon code -->
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <!-- end favicon code -->
 
-  <title>Map Fun</title>
+    <title>Map Fun</title>
 
   <!-- Bootstrap -->
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/one-page-wonder.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link href="assets/css/style.css" rel="stylesheet">
+<!-- Custom CSS -->
+      <link href="assets/css/style.css" rel="stylesheet">
 
 
   <!--font embed -->
-  <link href="https://fonts.googleapis.com/css?family=Proza+Libre|Roboto+Mono" rel="stylesheet">
-
-
+<link href="https://fonts.googleapis.com/css?family=Proza+Libre|Roboto+Mono" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+  </head>
 </head>
-   
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+             
+                <a class="navbar-brand" href="#">Map Fun</a>
+            </div>
 
-    <a class="navbar-brand" href="#">Map Fun</a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse in" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="searchText" placeholder="City, State">
+                </div>
+
+                <button type="submit" class="btn btn-default" id="submitSearch">Search</button>
+      
+            </form>
+  <div class="alert alert-warning alert-dismissable nogeo">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    We cannot locate you via geolocation. Please enter a City to continue.
   </div>
-
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse in" id="bs-example-navbar-collapse-1">
-
-    <form class="navbar-form navbar-left">
-      <div class="form-group">
-        <input type="text" class="form-control" id="searchText" placeholder="City, State or City, Country">
-      </div>
-      <button type="submit" class="btn btn-default" id="submitSearch">Search</button>
-    </form>
-    
-    <div class="alert alert-warning alert-dismissable nogeo">
+  <div class="alert alert-warning alert-dismissable nocity">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-      We cannot locate you via geolocation. Please enter a City to continue.
-    </div>
-    <div class="alert alert-warning alert-dismissable nocity">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-      The City you have entered is not valid (does not exist or misspelled). Please try again.
-    </div>
+    The City you have entered is not valid (does not exist or misspelled). Please try again.
   </div>
-  <!-- /.navbar-collapse -->
-  </div>
-  <!-- /.container -->
-  </nav>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-<!-- Full Width Image Header -->
-<header class="header-image">
-  <div class="headline">
+    <!-- Full Width Image Header -->
+    <header class="header-image">
+        <div class="headline">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12" id="map">
+                    <!--Place your maps code here-->
+                        <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="btn-group btn-group-vertical" role="group" id="mapForm" aria-label="map controls">
+                     <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-default" id="normalButton">Clear Map</button>
+                      </div>
+                      <div class="btn-group" role="group">
+                       <button type="button" class="btn btn-default" id="trafficButton">Traffic</button>
+                      </div>
+                         <div class="btn-group" role="group">
+                       <button type="button" class="btn btn-default" id="recenterButton">Recenter Map</button>
+                      </div>
+                  </div>
+
+                    
+                    <!--Place your maps code here-->
+                        <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+     <!-- Page Content -->
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12" id="map">
-          <!--Place your maps code here-->
-          <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
-        </div>
-      </div>
-      <div class="row">
-        <div class="btn-group btn-group-vertical" role="group" id="mapForm" aria-label="map controls">
-         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default" id="normalButton">Clear Map</button>
-        </div>
-        <div class="btn-group" role="group">
-         <button type="button" class="btn btn-default" id="trafficButton">Traffic</button>
-       </div>
-       <div class="btn-group" role="group">
-         <button type="button" class="btn btn-default" id="recenterButton">Recenter Map</button>
-       </div>
-     </div>
+
+        <hr class="featurette-divider">
 
 
-     <!--Place your maps code here-->
-     <!-- <img class="img img-responsive" src="http://library.korra.io/sleek/documentation/assets/img/shortcode_gmap.png" /> -->
-   </div>
- </div>
-</div>
-   </div>
- </header>
-
- <!-- Page Content -->
- <div class="container">
-
-  <hr class="featurette-divider">
-
-
-  <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title" >
-          <a data-toggle="collapse" data-parent="#accordion" id="news-panel-title" href="#collapse1">Local News</a>
-        </h3>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse in">
-        <div class="panel-body" >
-          <div class="list-group" id="newsContainer">
-            <a href="#" class="list-group-item">
-              <h4 class="list-group-item-heading"></h4>
-              <p class="list-group-item-text"></p>
-            </a>
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                    <h3 class="panel-title" >
+                        <a data-toggle="collapse" data-parent="#accordion" id="news-panel-title" href="#collapse1">Local News</a>
+                    </h3>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+              <div class="panel-body" >
+                        <div class="list-group" id="newsContainer">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading"></h4>
+                                <p class="list-group-item-text"></p>
+                             </a>
+                        </div>
+              </div>
+            </div>
           </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                 <h3 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" id="weather-panel-title" href="#collapse2">Local Weather</a>
+                </h3>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+              <div class="panel-body">
+                   <div class="list-group" id="weatherContainer">
+                  
+                   </div>
+              </div>
+            </div>
+          </div>
+
+<!--           <div class="panel panel-default">
+            <div class="panel-heading">
+                 <h3 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Local Something or Other</a></h3>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body" id="newItemContainer">
+                    <p></p>
+                </div>
+            </div>
+          </div> -->
         </div>
-      </div>
+       
+     <!--    <hr class="featurette-divider"> -->
+
+        </div>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; 2017, <a href="https://github.com/roycahn">Roy Cahn-Speyer</a>, <a href="https://www.linkedin.com/in/david-durkee-607b07a">Dave Durkee</a>, <a href="https://www.linkedin.com/in/dnhart">D'Ann Hart</a>, and <a href="https://github.com/ajandorek">Alec Jandorek</a></p>
+                </div>
+            </div>
+        </footer>
+
     </div>
+    <!-- /.container -->
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-     <h3 class="panel-title">
-      <a data-toggle="collapse" data-parent="#accordion" id="weather-panel-title" href="#collapse2">Local Weather</a>
-     </h3>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">
-        <div class="list-group" id="weatherContainer"></div>
-     </div>
-    </div>
-  </div>
- </div>
-
-        <!--    <hr class="featurette-divider"> -->
-
-      </div>
-      <!-- Footer -->
-  <footer>
-    <div class="row">
-      <div class="col-lg-12">
-        <p>Copyright &copy; 2017, <a href="https://github.com/roycahn">Roy Cahn-Speyer</a>, <a href="https://www.linkedin.com/in/david-durkee-607b07a">Dave Durkee</a>, <a href="https://www.linkedin.com/in/dnhart">D'Ann Hart</a>, and <a href="https://github.com/ajandorek">Alec Jandorek</a></p>
-      </div>
-    </div>
-  </footer>
-
-    
-
-    <!-- moment.js -->
+<!-- node.js -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
+<!-- Bootstrap Core JavaScript -->
     <script src="assets/javascript/bootstrap.min.js"></script>
 
-    <!-- jQuery -->
+<!-- jQuery -->
     <script src="assets/javascript/jquery.js"></script>
 
-    <!-- Custom JavaScript -->
-    <script src="assets/javascript/app.js"></script>
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGbh2qE4hTFk6gHI4OzTUiv1WchM4OmDw">
+  <script src="assets/javascript/app.js"></script>
+<!-- Custom JavaScript -->
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGbh2qE4hTFk6gHI4OzTUiv1WchM4OmDw">
     </script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+ -->
 
 
-
-  <script src="http://openlayers.org/api/OpenLayers.js"></script>
+<!--   <script src="http://openlayers.org/api/OpenLayers.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
-    <script src="http://openlayers.org/api/OpenLayers.js"></script>
-
 
 
 </body>
