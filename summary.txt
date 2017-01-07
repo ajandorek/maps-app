@@ -1,0 +1,25 @@
+Map fun is about providing information to newcommers to an area.
+Being new in town you don't know where to stay or eat or even what to wear. The app will provide immediate local weather, traffic, News and more.
+We designed this for people that like to travel and have fun. It is mobile by design and looks good on a normal laptop as well.
+
+The design was broken into managable individual tasks to allow concurrent development. The mainpage layout is bootstrap and the elements are rebuilt as needed to display content.
+
+APIs
+Google API for maps and traffic
+New York Times API for news
+Weather Underground API
+
+Libraries/ Framework
+Moment
+Bootstrap
+
+Attemps were made to use other APIs but didn't get finished
+Yelp - working single page.
+BreweryDB - working to get local beer information. Doesn't have street addresses.
+
+Adding a few more APIs for fun attractions and food will make this app more useful.
+
+D'Ann Hart - Main Page, CSS, Bootstrap, Traffic tons of details
+Alec Jandorek - Maps
+Roy Cahn-Speyer - News
+Dave Durkee - Weather
