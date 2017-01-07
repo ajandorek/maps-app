@@ -1,18 +1,19 @@
 
-  var lat = "30.268034";
-  var lng = "-97.742777";
-  var city = "";
-  var trafficLayer ="";
- var map="";
+var lat = "30.268034";
+var lng = "-97.742777";
+var city = "";
+var trafficLayer ="";
+var map="";
 var pos="";
 var recenter="";
 var weather="";
+
 //button styling for mobile
 document.addEventListener("touchstart", function(){}, true);
 window.addEventListener("resize", recenterMap);
 
-
-  $("#submitSearch").on("click", function(event){
+//Read Buttons
+$("#submitSearch").on("click", function(event){
 
     event.preventDefault();
 
@@ -26,16 +27,20 @@ window.addEventListener("resize", recenterMap);
     city = $("#searchText").val().trim();
 
     $(".nocity").css("display", "none");
-     $(".nogeo").css("display", "none");
+    $(".nogeo").css("display", "none");
+
+    //map the city
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
       queryURL = queryURL.replace(/\s+/g, '+');
       $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
 
-        if (typeof response.results[0] != 'undefined'){
+      // load latitude and longitude for use by weather query
+      if (typeof response.results[0] != 'undefined'){
         lat = response.results[0].geometry.location.lat;
         lng = response.results[0].geometry.location.lng;
         console.log(lat);
         console.log(lng);
+
         pos = {
               lat: response.results[0].geometry.location.lat,
               lng: response.results[0].geometry.location.lng
@@ -57,9 +62,10 @@ setCityName();
            $(".nocity").css("display", "block");
            return false;
         }
+        
+        
       
-      })
- 
+    }) //.ajax
 
 
     return false;
@@ -67,7 +73,7 @@ setCityName();
 
 
 
-
+  //start map in Austin, TX
   function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 30.268034, lng: -97.742777},
@@ -111,29 +117,27 @@ setCityName();
 
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-         //alert('Geolocation failed: '+error.message);
+         
       $(".nogeo").css("display", "block");
       };
 
 
-
+//Get city name from geo location
 function setCityName(){
        var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng+ "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
             $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
               city = response.results[0].address_components[3].long_name;
               console.log(city);
-                                      //getNews for Geolocated City
+              //getNews & weather for Geolocated City
               getNews(city);
-              //
-              //add call to get weather here
               getWeather(city);
-              });
+            });
 
 
 
 };
 
-
+//draw traffic
 function trafficMap(){
 
        
@@ -149,38 +153,33 @@ function trafficMap(){
 
 };
 
-
+// Return map to current geo location
 function recenterMap(){
 
-      map.setCenter(pos);
-
+  map.setCenter(pos);
+  // reload news and weather
+  setCityName();
 
 };
 
 
-
+//Button to remove traffic info from map
 function clearMap(){
 
-       
-    
-         
-          $("#normalButton").on("click", function(){
-              trafficLayer.setMap(null);
 
-              //turn off the visual "on" for the traffic button
-                $("#trafficButton").removeClass("buttonOn");
-              //immediately remove the focus state for the normal/reset map button
-                $("#normalButton").blur();
-            });
+  $("#normalButton").on("click", function(){
+      trafficLayer.setMap(null);
+
+      //turn off the visual "on" for the traffic button
+        $("#trafficButton").removeClass("buttonOn");
+      //immediately remove the focus state for the normal/reset map button
+        $("#normalButton").blur();
+  });
 
 };
 
 
-//}) // end of document ready
-//}); // end of document ready
-
-////getNews function
-
+//getNews function
 function getNews(city){
 
   clearNewsVariables();
@@ -199,13 +198,9 @@ function getNews(city){
 
 
   // Based on the city 
-
   var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey + "&sort=newest&q=";
 
   
-
- 
-
   //get current date  from moment.js and subtract six months so that oldest article is six months ago 
   var startDate = moment();
 
@@ -340,7 +335,7 @@ function clearNewsVariables(){
 function getWeather(city){
 
    clearWeatherVariables();
-  // Add City name to the News pannel Title
+  // Add City name to the Weather pannel Title
   $("#weather-panel-title").html("Local Weather for " + city+"  <span class='caret'></span>");
 
 var weatherQuery = "http://api.wunderground.com/api/61929af079ddbd78/geolookup/conditions/q/IA/"+city+".json";
