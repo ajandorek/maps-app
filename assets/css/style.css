@@ -129,6 +129,13 @@ footer {
   display: inline-block;
 }
 
+#wglogo{
+	max-height: 40px;
+}
+
+#weatherContainer > div > ul > li:nth-child(1){
+	border-top:  1px solid #ddd;
+}
 @media only screen and (min-width: 800px){
 
 body {

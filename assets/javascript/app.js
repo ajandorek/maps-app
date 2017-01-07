@@ -6,7 +6,7 @@
  var map="";
 var pos="";
 var recenter="";
-
+var weather="";
 //button styling for mobile
 document.addEventListener("touchstart", function(){}, true);
 window.addEventListener("resize", recenterMap);
@@ -24,10 +24,11 @@ window.addEventListener("resize", recenterMap);
 
 
     city = $("#searchText").val().trim();
+
     $(".nocity").css("display", "none");
      $(".nogeo").css("display", "none");
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyC-fJqB4vQYTcq51Xi3xnDEURRVZdsfNKg";
-
+      queryURL = queryURL.replace(/\s+/g, '+');
       $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
 
         if (typeof response.results[0] != 'undefined'){
@@ -46,6 +47,8 @@ window.addEventListener("resize", recenterMap);
           $('#searchText').val('');
            $('#searchText').attr("placeholder", "City, State");
             trafficMap();
+                //get the news for the city entered in the seach box
+setCityName();
             clearMap();
                       $("#recenterButton").on("click", function(){
               recenterMap();
@@ -57,10 +60,7 @@ window.addEventListener("resize", recenterMap);
       
       })
  
-    //get the news for the city entered in the seach box
-    getNews(city);
- 
-    getWeather(city);
+
 
     return false;
    }); // end of submitSearch - for map location
@@ -343,49 +343,56 @@ function getWeather(city){
   // Add City name to the News pannel Title
   $("#weather-panel-title").html("Local Weather for " + city+"  <span class='caret'></span>");
 
-
- var weatherQuery = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lng+"&appid=f84bde1340d8fb2ecf8f1802eedc0991&units=imperial";
+var weatherQuery = "http://api.wunderground.com/api/61929af079ddbd78/geolookup/conditions/q/IA/"+city+".json";
+  weatherQuery = weatherQuery.replace(/\s+/g, '+');
+ // var weatherQuery = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lng+"&appid=f84bde1340d8fb2ecf8f1802eedc0991&units=imperial";
   $.ajax({url: weatherQuery, method: "GET"}) 
     .done(function(result) {
-      console.log(result);
-       var weather=result;
+  
+       weather=result;
+            console.log(weather);
+        var temp = "Current Temperature: "+ weather.current_observation.temp_f+" &#8457;";
+        var feelsLike = "Feels Like: "+ weather.current_observation.feelslike_f+" &#8457;";
+        var humidity = "Humidity: "+ weather.current_observation.relative_humidity;
+       
+         var rainToday = "Rain Today: "+ weather.current_observation.precip_today_in+" in.";
+         var windSpeed = "Wind Speed: "+ weather.current_observation.wind_string;
+          var windChill = "Wind Chill: "+ weather.current_observation.windchill_f+" &#8457;";
+        var weatherIcon =  weather.current_observation.icon_url;
+        var description = "Current Weather: "+ weather.current_observation.weather+"<img src='"+weatherIcon+"' />";
 
-       var temp= "Current Temperature: "+ weather.main.temp+" &#8457;";
-       var humidity = "Humidity: "+weather.main.humidity+"%";
-       var tempMax = weather.main.temp_max;
-       var tempMin = weather.main.temp_min;
-       var cloudCover = "Cloud Cover: "+weather.clouds.all+"%";
-       var windSpeed = "Wind Speed: "+weather.wind.speed+" mph";
-       //var rain3hr = "3 Hour Rainfall"+weather.rain.3h;
-       var description = "Current Weather: "+weather.weather[0].description;
+// console.log(temp);
+// console.log(feelsLike);
+// console.log(humidity);
+// console.log(rainToday);
+// console.log(windSpeed);
+// console.log(windChill);
+// console.log(weatherIcon);
+// console.log(description);
+         var weatherBox = $("<div>");
+         weatherBox.attr("class", "list-group-item");
 
-
-
-
-
-        var weatherBox = $("<div>");
-        weatherBox.attr("class", "list-group-item");
-
-          //create weather description header in panel-heading
+           //create weather description header in panel-heading
           var currentDesc =$("<h4>");
             currentDesc.attr("class", "panel-heading articleTitle");
             currentDesc.css("font-weight","Bold");
             currentDesc.append(description);
 
             //create article date in panel
-          var currentCond = $("<ul>");
-            currentCond.attr("class", "list-group-item-text");
+           var currentCond = $("<ul>");
+             currentCond.attr("class", "list-group");
 
-            currentCond.append("<li>"+ temp +"</li>");
-            currentCond.append("<li>"+  humidity+"</li>");
-            currentCond.append("<li>"+ windSpeed+"</li>");
-            currentCond.append("<li>"+  cloudCover+"</li>");
-            //currentCond.append("<li>", rain3hr);
-
+          currentCond.append("<li class='list-group-item'>"+ temp +"</li>");
+          currentCond.append("<li class='list-group-item'>"+ feelsLike +"</li>");
+          currentCond.append("<li class='list-group-item'>"+ humidity +"</li>");
+          currentCond.append("<li class='list-group-item'>"+ windSpeed +"</li>");
+          currentCond.append("<li class='list-group-item'>"+ windChill +"</li>");
+          currentCond.append("<li class='list-group-item'>"+ rainToday +"</li>");
+          currentCond.append("<li class='list-group-item'><img id='wglogo'class='img img-responsive' src='assets/img/wundergroundLogo_4c_horz.png' /></li>");
             weatherBox.append(currentDesc);
             weatherBox.append(currentCond);
 
-  //write weather to html
+  // //write weather to html
     $("#weatherContainer").html(weatherBox);
 
       }).fail(function(err) {
